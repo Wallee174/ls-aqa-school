@@ -1,30 +1,30 @@
 package ru.ls.qa.school.addressbook;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.Dimension;
+
+import static com.codeborne.selenide.Selectors.byLinkText;
+import static com.codeborne.selenide.Selectors.byName;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class GroupCreationTests {
-  private WebDriver webDriver;
 
-  @BeforeEach
-  public void setUp() {
-    webDriver = new ChromeDriver();
+  @BeforeAll
+  static void setUp() {
+    Configuration.browserSize = "968, 1012";
   }
 
-  @AfterEach
-  public void tearDown() {
-    webDriver.quit();
+  @AfterAll
+  static void tearDown() {
+    closeWebDriver();
   }
+
   @Test
-  public void groupCreationTests() {
-    webDriver.get("http://localhost/addressbook/");
-    webDriver.manage().window().setSize(new Dimension(968, 1012));
+  void groupCreationTests() {
+    open("http://localhost/addressbook/");
     login("admin", "secret");
     goToGroupPage();
     clickCreateNewGroup();
@@ -35,38 +35,38 @@ public class GroupCreationTests {
   }
 
   private void login(String username, String password) {
-    webDriver.findElement(By.name("user")).click();
-    webDriver.findElement(By.name("user")).sendKeys(username);
-    webDriver.findElement(By.name("pass")).sendKeys(password);
-    webDriver.findElement(By.cssSelector("input:nth-child(7)")).click();
+    $(byName("user")).click();
+    $(byName("user")).setValue(username);
+    $(byName("pass")).setValue(password);
+    $("input:nth-child(7)").click();
   }
 
   private void goToGroupPage() {
-    webDriver.findElement(By.linkText("groups")).click();
+    $(byLinkText("groups")).click();
   }
 
   private void clickCreateNewGroup() {
-    webDriver.findElement(By.name("new")).click();
+    $(byName("new")).click();
   }
 
   private void fillGroupForm(GroupData groupData) {
-    webDriver.findElement(By.name("group_name")).sendKeys(groupData.getName());
-    webDriver.findElement(By.name("group_header")).click();
-    webDriver.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
-    webDriver.findElement(By.name("group_footer")).click();
-    webDriver.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
+    $(byName("group_name")).setValue(groupData.getName());
+    $(byName("group_header")).click();
+    $(byName("group_header")).setValue(groupData.getHeader());
+    $(byName("group_footer")).click();
+    $(byName("group_footer")).setValue(groupData.getFooter());
   }
 
   private void submitGroupCreation() {
-    webDriver.findElement(By.name("submit")).click();
+    $(byName("submit")).click();
   }
 
   private void returnToGroupPage() {
-    webDriver.findElement(By.linkText("group page")).click();
+    $(byLinkText("group page")).click();
   }
 
   private void logout() {
-    webDriver.findElement(By.linkText("Logout")).click();
+    $(byLinkText("Logout")).click();
   }
 
 }
