@@ -35,7 +35,6 @@ public class GroupCreationTests {
     }
 
     private void login(String username, String password) {
-        $(byName("user")).click();
         $(byName("user")).setValue(username);
         $(byName("pass")).setValue(password);
         $("input:nth-child(7)").click();
@@ -51,9 +50,7 @@ public class GroupCreationTests {
 
     private void fillGroupForm(GroupData groupData) {
         $(byName("group_name")).setValue(groupData.getName());
-        $(byName("group_header")).click();
         $(byName("group_header")).setValue(groupData.getHeader());
-        $(byName("group_footer")).click();
         $(byName("group_footer")).setValue(groupData.getFooter());
     }
 

@@ -41,8 +41,6 @@ public class ContactCreationTest {
     }
 
     private void login(String username, String password) {
-        $(byName("user")).click();
-        $(byName("user")).setValue(username);
         $(byName("user")).setValue(username);
         $(byName("pass")).setValue(password);
         $("input:nth-child(7)").click();
@@ -57,7 +55,6 @@ public class ContactCreationTest {
         $(byName("middlename")).setValue(contactData.getMiddleName());
         $(byName("lastname")).setValue(contactData.getLastName());
         $(byName("nickname")).setValue(contactData.getNickname());
-        $(byName("title")).click();
         $(byName("title")).setValue(contactData.getTitle());
         $(byName("company")).setValue(contactData.getCompany());
         $(byName("address")).setValue(contactData.getAddress());
