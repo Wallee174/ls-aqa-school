@@ -1,3 +1,6 @@
 # Project exclude paths
 /addressbook-web-tests/target/
 /ls-java-core/target/
+
+/addressbook-web-tests/build
+/ls-java-core/build
