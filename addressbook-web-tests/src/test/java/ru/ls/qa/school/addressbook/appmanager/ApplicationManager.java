@@ -7,15 +7,17 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class ApplicationManager {
 
-    private static SessionHelper sessionHelper;
+    private static volatile ApplicationManager instance;
 
-    private static GroupHelper groupHelper;
+    private SessionHelper sessionHelper;
 
-    private static NavigationHelper navigationHelper;
+    private GroupHelper groupHelper;
 
-    private static ContactHelper contactHelper;
+    private NavigationHelper navigationHelper;
 
-    public static void init() {
+    private ContactHelper contactHelper;
+
+    private ApplicationManager() {
         Configuration.browserSize = "968, 1012";
         open("http://localhost/addressbook/");
         groupHelper = new GroupHelper();
@@ -25,7 +27,14 @@ public class ApplicationManager {
         sessionHelper.login("admin", "secret");
     }
 
-    public static void stop() {
+    public static ApplicationManager init() {
+        if (instance == null) {
+            instance = new ApplicationManager();
+        }
+        return instance;
+    }
+
+    public void stop() {
         sessionHelper.logout();
         closeWebDriver();
     }
