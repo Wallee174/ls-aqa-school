@@ -4,3 +4,6 @@
 
 /addressbook-web-tests/build
 /ls-java-core/build
+
+/addressbook-web-tests/test-output
+/ls-java-core/test-output
