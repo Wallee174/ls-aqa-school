@@ -13,11 +13,14 @@ public class ApplicationManager {
 
     private static NavigationHelper navigationHelper;
 
+    private static PageManager pageManager;
+
     private static ContactHelper contactHelper;
 
     public static void init() {
         Configuration.browserSize = "968, 1012";
         open("http://localhost/addressbook/");
+//        pageManager = new PageManager(this); //А ЕСЛИ ТУТ ДОБАВЛЯТЬ, ТО НАЧИНАЕТ РУГАТЬСЯ
         groupHelper = new GroupHelper();
         navigationHelper = new NavigationHelper();
         sessionHelper = new SessionHelper();
@@ -29,6 +32,10 @@ public class ApplicationManager {
         sessionHelper.logout();
         closeWebDriver();
     }
+//НУЖНО ЛИ ЭТО ТУТ ДОБАВЛЯТЬ ?
+//    public static PageManager getPageManager() {
+//        return pageManager;
+//    }
 
     public GroupHelper getGroupHelper() {
         return groupHelper;
